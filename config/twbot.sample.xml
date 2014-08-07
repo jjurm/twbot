@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Edit and save as twbot.xml --><config>
+	<bot>
+		<threads>4</threads>
+		<delayConfig>
+			<delayRef id="programPause" delayName="program"/>
+			<delayRef id="cycle" delayName="pause"/><!-- delay between bot cycles -->
+			<delayRef id="village" delayName="long"/><!-- delay between village processings -->
+			<delayRef id="request" delayName="micro"/><!-- delay between requests to tribal-wars server -->
+		</delayConfig>
+	</bot>
+	<delays>
+		<delay name="pause">
+			<min>180000</min>
+			<max>300000</max>
+		</delay>
+		<delay name="long">
+			<min>1000</min>
+			<max>3000</max>
+		</delay>
+		<delay name="short">
+			<min>500</min>
+			<max>1500</max>
+		</delay>
+		<delay name="micro">
+			<min>30</min>
+			<max>100</max>
+		</delay>
+	</delays>
+	<modules>
+		<module name="ReportsImporter" factory="com.jjurm.twbot.bot.modules.impl.ReportsImporter$Factory">
+			<enabled>false</enabled>
+		</module>
+		<module name="VillageDataUpdater" factory="com.jjurm.twbot.bot.modules.impl.VillageDataUpdater$Factory">
+			<enabled>true</enabled>
+		</module>
+		<module name="UnitDataUpdater" factory="com.jjurm.twbot.bot.modules.impl.UnitDataUpdater$Factory">
+			<enabled>true</enabled>
+		</module>
+		<module name="AttackSender" factory="com.jjurm.twbot.bot.modules.impl.AttackSender$Factory">
+			<enabled>true</enabled>
+		</module>
+		<module name="MassAttackSender" factory="com.jjurm.twbot.bot.modules.impl.MassAttackSender$Factory">
+			<enabled>true</enabled>
+		</module>
+	</modules>
+</config>

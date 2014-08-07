@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?> <!-- Edit and save as tribalwars.xml -->
+<server>
+	<name>sk27</name>
+	<host>divoke-kmene.sk</host>
+	<player>player</player>
+	<password>abcdefghijklmnopqrstuvwxyz123456</password>
+</server>
