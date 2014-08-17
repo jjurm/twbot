@@ -22,3 +22,8 @@ hs_err_pid*
 # TWBot
 /tmp
 *.log
+config/world/*.xml
+config/database.xml
+config/tribalwars.xml
+config/twbot.xml
+config/log4j2.xml
