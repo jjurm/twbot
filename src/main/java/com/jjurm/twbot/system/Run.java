@@ -12,14 +12,15 @@ public class Run {
 	private Run() {} // Prevent instantiating this class
 
 	public static void main(String[] args) {
+
 		run();
+
 	}
 
 	public static void run() {
 
-		//test();
-
 		setSystemProperties();
+		registerShutdownHook();
 
 		Main.init();
 		Main.start();
@@ -43,13 +44,6 @@ public class Run {
 				Main.shutdownActions();
 			}
 		});
-	}
-
-	public static void test() {
-
-
-
-		System.exit(0);
 	}
 
 }

@@ -71,6 +71,7 @@ public class SocketListener implements Runnable {
 	public void writeToAll(byte[] data) throws IOException {
 		for (OutputStream output : outputs) {
 			output.write(data);
+			output.flush();
 		}
 	}
 
@@ -138,32 +139,31 @@ public class SocketListener implements Runnable {
 		public void run() {
 			setName("SocketThread-" + socketIndex);
 			
-			LOG.info("Accepted socket #" + socketIndex);
-
 			try (BufferedReader br = new BufferedReader(new InputStreamReader(
 					socket.getInputStream()));
 					OutputStream os = socket.getOutputStream();
 					PrintWriter pw = new PrintWriter(os, true)) {
 
 				socketListener.outputs.add(os);
+				LOG.info("Accepted socket #" + socketIndex);
 				
 				loop: while (true) {
 
 					try {
 						commander.process(br, pw);
 					} catch (StreamCloseRequest scr) {
+						LOG.info("Closed socket #" + socketIndex);
+						socketListener.outputs.remove(os);
 						try {
 							socket.close();
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-						LOG.info("Closed socket #" + socketIndex);
 						break loop;
 					}
 
 				}
 				
-				socketListener.outputs.remove(os);
 
 			} catch (IOException e) {
 				e.printStackTrace();
