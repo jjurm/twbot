@@ -36,6 +36,8 @@ public class Commander {
 
 	Map<String, Command> commands = new HashMap<String, Command>();
 
+	static final Logger clientLogger = LogManager.getLogger("client");
+
 	/**
 	 * Basic constructor
 	 * 
@@ -179,6 +181,19 @@ public class Commander {
 				} catch (FailingHttpStatusCodeException | IOException e) {
 					e.printStackTrace(pw);
 				}
+			}
+		});
+		commands.put("log", new Command() {
+			@Override
+			public void process(String[] args, BufferedReader br, PrintWriter pw) {
+				StringBuilder sb = new StringBuilder();
+				for (String s : args) {
+					if (sb.length() > 0) {
+						sb.append(" ");
+					}
+					sb.append(s);
+				}
+				clientLogger.debug(sb.toString());
 			}
 		});
 	}
