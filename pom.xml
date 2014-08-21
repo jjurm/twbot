@@ -4,7 +4,7 @@
 
   <groupId>com.jjurm</groupId>
   <artifactId>twbot</artifactId>
-  <version>0.2</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>twbot</name>
@@ -56,34 +56,45 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>copy-dependencies</id>
-            <phase>package</phase>
-            <goals>
-              <goal>copy-dependencies</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${project.build.directory}</outputDirectory>
-              <overWriteReleases>false</overWriteReleases>
-              <overWriteSnapshots>true</overWriteSnapshots>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
         <version>2.5</version>
         <configuration>
           <archive>
             <manifest>
-              <addClasspath>true</addClasspath>
+              <!--<addClasspath>true</addClasspath>-->
               <mainClass>com.jjurm.twbot.system.Run</mainClass>
             </manifest>
           </archive>
         </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>appassembler-maven-plugin</artifactId>
+        <version>1.8.1</version>
+        <configuration>
+          <repositoryName>lib</repositoryName>
+          <repositoryLayout>flat</repositoryLayout>
+          <programs>
+            <program>
+              <mainClass>com.jjurm.twbot.system.Run</mainClass>
+              <id>twbot</id>
+              <jvmSettings>
+                <initialMemorySize>30m</initialMemorySize>
+                <maxMemorySize>256m</maxMemorySize>
+                <maxStackSize>128m</maxStackSize>
+              </jvmSettings>
+            </program>
+          </programs>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>assemble</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
