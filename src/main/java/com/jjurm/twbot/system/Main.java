@@ -50,7 +50,7 @@ public class Main {
 		// Correct time zone
 		setTimeZone();
 
-		LOG.fatal("Initializing");
+		LOG.fatal("Initializing [" + Run.projectName + "-" + Run.projectVersion + "]");
 
 		// Initialize FilesMap
 		LOG.info("Parsing configuration files");
